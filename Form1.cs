@@ -67,7 +67,7 @@ namespace Student_Info
 
             if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(major) || string.IsNullOrEmpty(advisorID) || !double.TryParse(txtGPA.Text, out gpa))
             {
-                MessageBox.Show("��سҡ�͡���������ú��ǹ ��С�͡ GPA �繵���Ţ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("กรุณากรอกข้อมูลให้ครบถ้วน และกรอก GPA เป็นตัวเลข", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace Student_Info
             students.Add(student);
             lstStudents.Items.Add(student.ToString());
 
-            // �����Ҩ����ҡ ID ᷹����
+            // ¤é¹ËÒÍÒ¨ÒÃÂì¨Ò¡ ID á·¹ª×èÍ
             var advisor = teachers.FirstOrDefault(t => t.ID == advisorID);
             if (advisor != null)
             {
@@ -83,7 +83,7 @@ namespace Student_Info
             }
             else
             {
-                MessageBox.Show("��辺�Ҩ�������֡�� ��سҵ�Ǩ�ͺ����!", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ไม่พบอาจารย์ที่ปรึกษา กรุณาตรวจสอบรหัส!", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -95,11 +95,11 @@ namespace Student_Info
 
             if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(major))
             {
-                MessageBox.Show("��سҡ�͡���������ú��ǹ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("กรุณากรอกข้อมูลให้ครบถ้วน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (!teachers.Any(t => t.ID == id)) // ��Ǩ�ͺ��� ID ��������������������
+            if (!teachers.Any(t => t.ID == id)) // µÃÇ¨ÊÍºÇèÒ ID ¹ÕéÁÕÍÂÙèáÅéÇËÃ×ÍäÁè
             {
                 Teacher newTeacher = new Teacher { ID = id, Name = name, Major = major };
                 teachers.Add(newTeacher);
@@ -107,7 +107,7 @@ namespace Student_Info
             }
             else
             {
-                MessageBox.Show("�Ҩ���줹�������������!", "����͹", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("อาจารย์คนนี้มีอยู่แล้ว!", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -173,14 +173,14 @@ namespace Student_Info
             if (lstTeachers.SelectedIndex >= 0)
             {
                 string selectedText = lstTeachers.SelectedItem.ToString();
-                string teacherID = selectedText.Split('-')[0].Trim(); // �֧ ID �ҡ ListBox
+                string teacherID = selectedText.Split('-')[0].Trim(); // ´Ö§ ID ¨Ò¡ ListBox
 
                 var selectedTeacher = teachers.FirstOrDefault(t => t.ID == teacherID);
                 if (selectedTeacher != null)
                 {
                     var advisees = selectedTeacher.GetAdvisees();
-                    string adviseeList = advisees.Count > 0 ? string.Join("\n", advisees.Select(s => s.ToString())) : "����չѡ�֡��㹷���֡��";
-                    MessageBox.Show(adviseeList, $"�ѡ�֡�ҷ������㹷���֡�Ңͧ {selectedTeacher.Name}");
+                    string adviseeList = advisees.Count > 0 ? string.Join("\n", advisees.Select(s => s.ToString())) : "ไม่มีนักศึกษาในที่ปรึกษา";
+                    MessageBox.Show(adviseeList, $"นักศึกษาที่อยู่ในที่ปรึกษาของ {selectedTeacher.Name}");
                 }
             }
         }
