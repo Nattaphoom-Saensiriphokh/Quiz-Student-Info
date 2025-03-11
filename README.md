@@ -1,34 +1,33 @@
 # Quiz-Student-Info
 
 # 1. Class Diagram ของโปรแกรม
+```mermaid
+classDiagram
+    class Person {
+        - ID: string
+        - Name: string
+        + ToString(): string
+    }
 
-@startuml
-abstract class Person {
-    - ID: string
-    - Name: string
-    + ToString(): string
-}
+    class Student {
+        - Major: string
+        - AdvisorName: string
+        - GPA: double
+        + ToString(): string
+    }
 
-class Student {
-    - Major: string
-    - AdvisorName: string
-    - GPA: double
-    + ToString(): string
-}
+    class Teacher {
+        - Major: string
+        - advisees: List<Student>
+        + AddAdvisee(s: Student)
+        + GetAdvisees(): List<Student>
+        + ToString(): string
+    }
 
-class Teacher {
-    - Major: string
-    - advisees: List<Student>
-    + AddAdvisee(s: Student)
-    + GetAdvisees(): List<Student>
-    + ToString(): string
-}
-
-Person <|-- Student
-Person <|-- Teacher
-Teacher "1" o-- "*" Student : advises
-@enduml
-
+    Person <|-- Student
+    Person <|-- Teacher
+    Teacher "1" o-- "*" Student : advises
+```
 
 
 
